@@ -1,0 +1,180 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f6f9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+/* Khung viền toàn bộ giao diện */
+.container {
+  width: 100%;
+  max-width: 1050px;
+  background: #ffffff;
+  border: 1px solid #666666;
+  padding: 15px;
+}
+
+/* Header */
+.product-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  border-bottom: 1px solid #dcdcdc;
+  padding-bottom: 10px;
+  margin-bottom: 15px;
+}
+
+.product-header .title {
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: #333333;
+  position: relative;
+  padding-bottom: 6px;
+}
+
+/* Đường gạch chân tiêu đề */
+.product-header .title::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -11px;
+  width: 100%;
+  height: 2px;
+  background-color: #333333;
+}
+
+.category-nav {
+  display: flex;
+  gap: 20px;
+}
+
+.category-nav .nav-item {
+  text-decoration: none;
+  color: #4a75a0;
+  font-size: 0.95rem;
+}
+
+/* Cột chia đôi giao diện */
+.content-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+/* Cột trái: 2 sản phẩm nằm ngang */
+.products-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+.product-card {
+  display: flex;
+  flex-direction: column;
+}
+
+.card-image {
+  width: 100%;
+  height: 270px;
+  background-color: #eee;
+}
+
+.card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.card-body {
+  padding: 12px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.product-name {
+  font-size: 0.95rem;
+  font-weight: normal;
+  color: #444444;
+}
+
+.current-price {
+  font-weight: bold;
+  font-size: 0.9rem;
+  display: block;
+}
+
+.old-price {
+  font-size: 0.85rem;
+  color: #666666;
+  text-decoration: line-through;
+  display: block;
+}
+
+/* Nút ADD TO CART màu đỏ */
+.btn-add-cart {
+  background-color: #d9534f;
+  color: #ffffff;
+  border: none;
+  padding: 8px 12px;
+  font-size: 0.75rem;
+  font-weight: bold;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* Cột phải: Banner */
+.promo-banner {
+  position: relative;
+  width: 100%;
+  min-height: 380px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.banner-img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.banner-overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.25);
+}
+
+.banner-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+}
+
+.banner-title {
+  color: #ffffff;
+  font-size: 2.2rem;
+  margin-bottom: 15px;
+  letter-spacing: 2px;
+}
+
+.btn-view-all {
+  background-color: #d9534f;
+  color: #ffffff;
+  text-decoration: none;
+  padding: 10px 24px;
+  font-weight: bold;
+  font-size: 0.85rem;
+  display: inline-block;
+}
