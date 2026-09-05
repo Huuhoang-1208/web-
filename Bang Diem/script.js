@@ -33,7 +33,7 @@ function myFunction1() {
     if (k >= 9) {
 
         document.getElementById('display').innerHTML =
-            "Hoc sinh gioi";
+            "Hoc sinh giỏi";
 
         document.getElementById('display').style.color =
             "red";
@@ -42,7 +42,7 @@ function myFunction1() {
     if (k >= 7 && k < 9) {
 
         document.getElementById('display').innerHTML =
-            "Hoc sinh kha";
+            "Hoc sinh khá";
 
         document.getElementById('display').style.color =
             "blue";
@@ -51,7 +51,7 @@ function myFunction1() {
     if (k >= 5 && k < 7) {
 
         document.getElementById('display').innerHTML =
-            "Hoc sinh Trung binh";
+            "Hoc sinh Trung bình";
 
         document.getElementById('display').style.color =
             "yellow";
