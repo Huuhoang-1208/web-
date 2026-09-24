@@ -2,14 +2,19 @@
   "name": "btvn_b8",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "view/app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node view/app.js",
+    "dev": "node view/app.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "ejs": "^6.0.1",
     "express": "^5.2.1"
+  },
+  "devDependencies": {
+    "vite": "^8.3.0"
   }
 }
