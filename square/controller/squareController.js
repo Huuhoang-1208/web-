@@ -1,4 +1,4 @@
-const Square = require("../models/square");
+const Square = require("../model/square");
 
 exports.showForm = (req, res) => {
   res.render("index", {
