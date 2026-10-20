@@ -1,0 +1,80 @@
+<form class="product-form" action="<%= action %>" method="post" enctype="multipart/form-data">
+  <label>PRODUCT NAME 
+    <input name="name" value="<%= product?.name || '' %>" required maxlength="120" placeholder="For example: Full Camo Hoodie">
+  </label>
+  
+  <div class="form-row">
+    <label>PRICE (VND) 
+      <input name="price" type="number" min="0" step="1000" value="<%= product?.price ?? '' %>" required>
+    </label>
+    <label>QUANTITY 
+      <input name="quantity" type="number" min="0" step="1" value="<%= product?.quantity ?? '' %>" required>
+    </label>
+  </div>
+
+  <label>CATEGORY 
+    <select name="category" required><% categories.forEach(item => { %>
+      <option value="<%= item %>" <%= (product ? categoryOf(product) : 'hoodies') === item ? 'selected' : '' %>><%= item.toUpperCase() %>
+      </option><% }) %>
+    </select>
+  </label>
+
+  <label>DESCRIPTION 
+    <textarea name="description" rows="5" placeholder="Materials, silhouette, and design inspiration..."><%= product?.description || '' %>
+    </textarea>
+  </label>
+
+  <label>COLOR
+    <input name="color" value="<%= product?.color || '' %>" placeholder="For example: CAMO">
+  </label>
+
+  <fieldset class="form-sizes">
+    <legend>AVAILABLE SIZES</legend>
+    <% ['M', 'L', 'XL'].forEach(size => { %>
+      <label>
+        <input type="checkbox" name="sizes" value="<%= size %>"
+          <%= (product?.sizes || []).includes(size) ? 'checked' : '' %>>
+        <%= size %>
+      </label>
+    <% }) %>
+  </fieldset>
+
+  <label>MATERIAL
+    <textarea name="material" rows="3"><%= product?.material || '' %></textarea>
+  </label>
+
+  <label>FIT
+    <textarea name="fit" rows="3"><%= product?.fit || '' %></textarea>
+  </label>
+
+  <label>CARE
+    <textarea name="care" rows="3"><%= product?.care || '' %></textarea>
+  </label>
+
+  <label>PRODUCT IMAGE 
+    <input name="image" type="file" accept="image/png,image/jpeg,image/webp" <%= product ? '' : 'required' %>>
+    <small>PNG, JPG or WEBP; maximum 5 MB.<%= product ? ' Leave blank to keep the current image.' : '' %>
+    </small>
+  </label>
+
+  <label>ADDITIONAL IMAGES
+    <input name="images" type="file" accept="image/png,image/jpeg,image/webp" multiple>
+    <small>Chọn tối đa 8 ảnh. Để trống khi sửa nếu muốn giữ các ảnh hiện có.</small>
+  </label>
+
+  <% (product?.images || []).forEach(src => { %>
+    <img class="form-preview" src="<%= src %>" alt="Additional product image">
+  <% }) %>
+
+  <% if (product) { %>
+    <img class="form-preview" src="<%= product.image %>" alt="Current product image"><% } %>
+  <div class="form-actions">
+    <button class="button-dark" type="submit"><%= submitText %> 
+      ↗
+    </button>
+    
+    <a class="text-link" href="<%= product ? '/products/' + product._id : '/shop' %>">
+      CANCEL
+    </a>
+  </div>
+</form>

@@ -1,0 +1,9 @@
+<%- include('partials/header', { title: 'Edit product' }) %>
+<main class="form-page">
+    <div class="form-heading">
+        <span class="eyebrow">PRODUCT MANAGEMENT / 02</span>
+        <h1>EDIT PRODUCT</h1>
+        <p>Cập nhật thông tin cho <%= product.name %>.</p>
+    </div><%- include('partials/product-form', { action: '/edit/' + product._id, submitText: 'SAVE CHANGES' }) %>
+</main>
+<%- include('partials/footer') %>

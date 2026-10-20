@@ -1,0 +1,139 @@
+<%- include('partials/header', { title: product.name }) %>
+<main>
+  <div class="breadcrumb">
+    <a href="/shop">SHOP</a> / <%= product.name %>
+  </div>
+
+  <section class="detail-hero">
+    <div class="detail-gallery">
+      <div class="detail-image">
+        <img id="main-product-image" src="<%= product.image %>" alt="<%= product.name %>">
+      </div>
+
+      <% if ((product.images || []).length) { %>
+        <div class="thumbnail-gallery">
+          <% [product.image, ...product.images].forEach((src, index) => { %>
+            <button class="thumbnail <%= index === 0 ? 'active' : '' %>"
+              type="button" data-src="<%= src %>"
+              aria-label="Xem ảnh <%= index + 1 %> của <%= product.name %>">
+              <img src="<%= src %>" alt="">
+            </button>
+          <% }) %>
+        </div>
+      <% } %>
+    </div>
+    
+    <div class="detail-copy">
+      <span class="eyebrow">HAVEN STUDIO / <%= categoryOf(product).toUpperCase() %>
+      </span>
+      <h1><%= product.name %></h1>
+      <strong class="detail-price"><%= Number(product.price).toLocaleString('vi-VN') %> VND</strong>
+      <p><%= product.description || 'Thiết kế streetwear dành cho chuyển động mỗi ngày.' %></p>
+      
+      <% if (product.color) { %>
+        <div class="product-option">
+          <strong>COLOR</strong>
+          <div><span class="color-option"><%= product.color %></span></div>
+        </div>
+      <% } %>
+
+      <% if ((product.sizes || []).length) { %>
+        <fieldset class="product-option">
+          <legend>SIZE</legend>
+          <div class="size-options">
+            <% product.sizes.forEach(size => { %>
+              <label class="size-option">
+                <input type="radio" name="selectedSize" value="<%= size %>">
+                <span><%= size %></span>
+              </label>
+            <% }) %>
+          </div>
+        </fieldset>
+      <% } %>
+
+      <div class="detail-meta">
+        <span>AVAILABILITY</span>
+        <strong><%= product.quantity > 0 ? product.quantity + ' IN STOCK' : 'SOLD OUT' %></strong>
+      </div>
+      
+      <div class="detail-actions">
+        <a class="button-dark" href="/edit/<%= product._id %>">EDIT PRODUCT ↗</a>
+        <form action="/delete/<%= product._id %>" method="post" onsubmit="return confirm('Xóa sản phẩm này?')">
+          <button class="button-outline" type="submit">DELETE</button>
+        </form>
+      </div>
+
+      <div class="product-benefits">
+        <div class="benefit-item">
+          <div class="benefit-icon" aria-hidden="true">♧</div>
+          <h3>FREE SHIPPING</h3>
+          <p>đơn từ 1.000.000đ</p>
+        </div>
+
+        <div class="benefit-item">
+          <div class="benefit-icon" aria-hidden="true">↻</div>
+          <h3>7 DAYS RETURN</h3>
+          <p>đổi trả dễ dàng</p>
+        </div>
+
+        <div class="benefit-item">
+          <div class="benefit-icon" aria-hidden="true">◇</div>
+          <h3>AUTHENTIC</h3>
+          <p>100% chính hãng</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="philosophy detail-section section-pad">
+    <span class="eyebrow">DETAILS</span>
+    <h2>BUILT FOR THE STREET</h2>
+    <div class="value-grid">
+      <article><span>01</span>
+        <h3>DESCRIPTION</h3>
+        <p><%= product.description || 'Designed for everyday streetwear.' %></p>
+      </article>
+      <article>
+        
+        <span>02</span>
+        <h3>MATERIAL</h3>
+        <p><%= product.material || 'Chưa có thông tin chất liệu.' %></p>
+      </article>
+      <article>
+        <span>03</span>
+        <h3>FIT</h3>
+        <p><%= product.fit || 'Chưa có thông tin form dáng.' %></p>
+      </article>
+      
+      <article>
+        <span>04</span>
+        <h3>CARE</h3>
+        <p><%= product.care || 'Chưa có hướng dẫn bảo quản.' %></p>
+      </article>
+    </div>
+  </section>
+  <% if (related.length) { %>
+    <section class="related section-pad">
+      <div class="section-heading">
+        <span class="eyebrow">YOU MAY ALSO LIKE</span>
+        <a class="text-link" href="/shop">VIEW ALL ↗</a>
+      </div>
+      
+      <div class="cards-grid"><% related.forEach(product => { %><%- include('partials/product-card', { product }) %><% }) %>
+      </div>
+    </section><% } %>
+</main>
+
+<script>
+  const mainImage = document.querySelector('#main-product-image');
+  const thumbnails = document.querySelectorAll('.thumbnail');
+
+  thumbnails.forEach(button => {
+    button.addEventListener('click', () => {
+      mainImage.src = button.dataset.src;
+      thumbnails.forEach(item => item.classList.remove('active'));
+      button.classList.add('active');
+    });
+  });
+</script>
+
+<%- include('partials/footer') %>

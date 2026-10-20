@@ -1,0 +1,15 @@
+<article class="product-card">
+  <a href="<%= product._id ? '/products/' + product._id : '/shop' %>" aria-label="Xem <%= product.name %>">
+    <div class="card-image">
+      <img src="<%= product.image %>" alt="<%= product.name %>" loading="lazy"><% if (product.quantity === 0) { %>
+        <span class="sold-out">
+          SOLD OUT
+        </span><% } %>
+      </div>
+    <div class="card-copy">
+      <span class="eyebrow"><%= (product.category || 'streetwear').toUpperCase() %></span>
+      <h3><%= product.name %></h3>
+      <p><%= Number(product.price).toLocaleString('vi-VN') %> VND</p>
+    </div>
+  </a>
+</article>

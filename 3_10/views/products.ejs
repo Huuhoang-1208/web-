@@ -1,0 +1,42 @@
+<%- include('partials/header', { title: 'Shop' }) %>
+<main>
+  <section class="listing-intro section-pad">
+    <div><span class="eyebrow">COLLECTION / 01</span>
+      <h1>ESSENTIALS</h1>
+      <p>Daily uniforms shaped by utility, volume, and the concrete landscape.</p>
+    </div>
+    <form class="sort-form" action="/shop" method="get"><% if (category !== 'all') { %>
+      <input type="hidden" name="category" value="<%= category %>"><% } %><% if (search) { %>
+        <input type="hidden" name="q" value="<%= search %>"><% } %>
+        <label for="sort">SORT</label>
+        <select id="sort" name="sort" onchange="this.form.submit()">
+          <option value="newest" <%= sort === 'newest' ? 'selected' : '' %>>NEWEST</option>
+          <option value="price-asc" <%= sort === 'price-asc' ? 'selected' : '' %>>PRICE: LOW TO HIGH</option>
+          <option value="price-desc" <%= sort === 'price-desc' ? 'selected' : '' %>>PRICE: HIGH TO LOW</option>
+        </select>
+      </form>
+    </section>
+  <div class="shop-toolbar section-pad">
+    <nav class="category-nav" aria-label="Product categories">
+      <a class="<%= category === 'all' ? 'active' : '' %>" href="/shop">ALL</a><% categories.forEach(item => { %>
+        <a class="<%= category === item ? 'active' : '' %>" href="/shop?category=<%= item %>"><%= item.toUpperCase() %></a><% }) %>
+      </nav>
+      <form class="search-form" action="/shop" method="get">
+        <input aria-label="Tìm sản phẩm" name="q" value="<%= search %>" placeholder="SEARCH PRODUCTS">
+        <button type="submit">
+          ↗
+        </button>
+      </form>
+    </div>
+  <% if (products.length) { %>
+    <div class="cards-grid listing-grid"><% products.forEach(product => { %><%- include('partials/product-card', { product }) %><% }) %>
+    </div><% } else { %><div class="empty-state">
+      <h2>NO PRODUCTS FOUND</h2>
+      <p>Try a different category or add a new product.</p>
+      <a class="button-dark" href="/add">ADD PRODUCT 
+        ↗
+      </a>
+    </div><% 
+  } %>
+</main>
+<%- include('partials/footer') %>
